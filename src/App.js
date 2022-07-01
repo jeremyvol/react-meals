@@ -1,5 +1,5 @@
-import MealsSummary from './components/Meals/MealsSummary';
-import Header from './components/UI/Header';
+import MealsSummary from './components/Meals/MealsSummary/MealsSummary';
+import Header from './components/UI/Header/Header';
 
 const App = () => {
   return (
