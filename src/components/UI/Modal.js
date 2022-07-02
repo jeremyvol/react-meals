@@ -1,7 +1,7 @@
 import classes from './Modal.module.css';
 
 const Modal = () => {
-  return <>Cart component</>;
+  return <>Modal component</>;
 };
 
 export default Modal;

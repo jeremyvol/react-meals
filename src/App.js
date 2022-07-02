@@ -1,11 +1,13 @@
-import MealsSummary from './components/Meals/MealsSummary/MealsSummary';
+import Meals from './components/Meals/Meals';
 import Header from './components/Layout/Header';
 
 const App = () => {
   return (
     <>
       <Header />
-      <MealsSummary />
+      <main>
+        <Meals />
+      </main>
     </>
   );
 };
