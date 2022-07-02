@@ -1,4 +1,4 @@
-import HeaderCartButton from '../Layout/HeaderCartButton';
+import HeaderCartButton from './HeaderCartButton';
 import classes from './Header.module.css';
 
 import mealsImage from '../../assets/meals.jpg';
