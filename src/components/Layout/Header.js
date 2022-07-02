@@ -1,7 +1,7 @@
-import HeaderCartButton from '../../Cart/HeaderCartButton/HeaderCartButton';
+import HeaderCartButton from '../Layout/HeaderCartButton';
 import classes from './Header.module.css';
 
-import mealsImage from '../../../assets/meals.jpg';
+import mealsImage from '../../assets/meals.jpg';
 
 const Header = () => {
   return (
