@@ -12,7 +12,7 @@ const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD':
       updatedItems = [...state.items, action.payload];
-      updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
+      updatedTotalAmount = state.totalAmount + action.payload.price * action.payload.amount;
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount,
@@ -31,23 +31,25 @@ const cartReducer = (state, action) => {
   }
 };
 
-export const CartProvider = (props) => {
+const CartProvider = (props) => {
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
 
-  const addItemToCarthandler = (item) => {
+  const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', payload: item });
   };
 
-  const removeItemFromCarthandler = (id) => {
+  const removeItemFromCartHandler = (id) => {
     dispatchCartAction({ type: 'REMOVE', payload: id });
   };
 
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
-    addItem: addItemToCarthandler,
-    removeItem: removeItemFromCarthandler,
+    addItem: addItemToCartHandler,
+    removeItem: removeItemFromCartHandler,
   };
 
   return <CartContext.Provider value={cartContext}>{props.children}</CartContext.Provider>;
 };
+
+export default CartProvider;
