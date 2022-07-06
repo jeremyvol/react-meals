@@ -10,7 +10,6 @@ const MealItemForm = (props) => {
   // const cartCtx = useContext(CartContext);
 
   const submitHandler = (event) => {
-    console.log(submitHandler);
     event.preventDefault();
 
     const enteredAmount = +amountInputRef.current.value;

@@ -9,41 +9,57 @@ const defaultCartState = {
 const cartReducer = (state, action) => {
   let updatedItems = [];
   let updatedTotalAmount;
-  switch (action.type) {
-    case 'ADD':
-      updatedTotalAmount = state.totalAmount + action.payload.price * action.payload.amount;
+  // switch (action.type) {
+  // case 'ADD':
 
-      const existingCartItemIndex = state.items.findIndex((item) => item.id === action.payload.id);
-      const existingCartItem = state.items[existingCartItemIndex];
+  if (action.type === 'ADD') {
+    updatedTotalAmount = state.totalAmount + action.payload.price * action.payload.amount;
+    const existingCartItemIndex = state.items.findIndex((item) => item.id === action.payload.id);
+    const existingCartItem = state.items[existingCartItemIndex];
 
-      if (existingCartItem) {
-        const updatedItem = {
-          ...existingCartItem,
-          amount: existingCartItem.amount + action.payload.amount,
-        };
-        updatedItems = [...state.items];
-        updatedItems[existingCartItemIndex] = updatedItem;
-      } else {
-        updatedItems = [...state.items, action.payload];
-      }
-
+    if (existingCartItem) {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.payload.amount,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    } else {
       updatedItems = [...state.items, action.payload];
-      return {
-        items: updatedItems,
-        totalAmount: updatedTotalAmount,
-      };
+    }
 
-    case 'REMOVE':
-      updatedItems = state.items.filter((item) => item.id !== action.payload);
-      updatedTotalAmount = state.totalAmount - state.items.find((item) => item.id === action.payload).price;
-      return {
-        items: updatedItems,
-        totalAmount: updatedTotalAmount,
-      };
-
-    default:
-      return defaultCartState;
+    // updatedItems = [...state.items, action.payload];
+    return {
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
   }
+
+  if (action.type === 'REMOVE') {
+    const existingCartItemIndex = state.items.findIndex((item) => item.id === action.payload);
+    const existingCartItem = state.items[existingCartItemIndex];
+    updatedTotalAmount = state.totalAmount - existingCartItem.price;
+
+    // case 'REMOVE':
+
+    if (existingCartItem.amount === 1) {
+      updatedItems = state.items.filter((item) => item.id !== action.payload);
+    } else {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount - 1,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    }
+    return {
+      items: updatedItems,
+      totalAmount: updatedTotalAmount,
+    };
+  }
+  // default:
+  return defaultCartState;
+  // }
 };
 
 const CartProvider = (props) => {
